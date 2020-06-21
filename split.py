@@ -32,8 +32,9 @@ def estimate_processing_time(raw_time):
 
 
 def process_file(path):
-    split_path = os.path.splitext(path)
-    output_dir = "output_{0}".format(split_path[0])
+    base_path = os.path.split(path)  # path + filename
+    split_path = os.path.splitext(base_path[1])  # filename + ext
+    output_dir = os.path.join(base_path[0], "output_{0}".format(split_path[0]))
 
     log("Importing {0}...".format(path))
     sound = audiosegment.from_file(path)
